@@ -1,0 +1,25 @@
+{
+  "name": "codestat",
+  "version": "1.0.0",
+  "description": "code data analyse",
+  "keywords": [
+    "data"
+  ],
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arcthur/codestat.git"
+  },
+  "author": "arcthur",
+  "bugs": {
+    "url": "https://github.com/arcthur/codestat/issues"
+  },
+  "homepage": "https://github.com/arcthur/codestat",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "google-trends-api": "^4.1.0",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1"
+  },
+  "license": "MIT"
+}
