@@ -2,34 +2,42 @@
   "sources": [{
     "repo": "vuejs/vue",
     "pkg": "vue",
-    "keyword": "vue.js"
+    "keyword": "vue.js",
+    "search": "vuejs"
   }, {
     "repo": "vuejs/vuex",
     "pkg": "vuex",
-    "keyword": "vuex"
+    "keyword": "vuex",
+    "search": "vuex"
   }, {
     "repo": "facebook/react",
     "pkg": "react",
-    "keyword": "reactjs"
+    "keyword": "reactjs",
+    "search": "reactjs"
   }, {
     "repo": "reactjs/redux",
     "pkg": "redux",
-    "keyword": "redux"
+    "keyword": "redux",
+    "search": "redux"
   }, {
     "repo": "mobxjs/mobx",
     "pkg": "mobx",
-    "keyword": "mobx"
+    "keyword": "mobx",
+    "search": "mobx"
   }, {
     "repo": "jquery/jquery",
     "pkg": "jquery",
-    "keyword": "jquery"
+    "keyword": "jquery",
+    "search": "jquery"
   }, {
     "repo": "angular/angular.js",
     "pkg": "angularjs",
-    "keyword": "angular"
+    "keyword": "angular",
+    "search": "angularjs"
   }, {
     "repo": "jashkenas/backbone",
     "pkg": "backbone",
-    "keyword": "backbone.js"
+    "keyword": "backbone.js",
+    "search": "backbonejs"
   }]
 }

@@ -3,6 +3,7 @@ const npmAPI = require('./src/api/npm');
 const stackoverflowAPI = require('./src/api/stackoverflow');
 const githubAPI = require('./src/api/github');
 const writeJson = require('./src/writeJson');
+const googleTrendAPI = require('./src/api/googleTrend');
 const sources = require('./sources.json');
 
 async function npmWeekInfo() {
@@ -48,6 +49,13 @@ async function githubStarWeekInfo() {
   return finalWeekData;
 }
 
+async function googleTrendInfo() {
+  const weekPromise = sources.sources.map(res => googleTrendAPI.transformGTrendinterestOverTime(res.repo, res.search));
+  const combineWeekData = await Promise.all(weekPromise);
+  const finalWeekData = _.flatten(combineWeekData);
+  return finalWeekData;
+}
+
 async function main() {
   // const npm = await npmWeekInfo();
   // writeJson('./files/npm-last-year.json', { npm: npm });
@@ -56,13 +64,16 @@ async function main() {
   // writeJson('./files/stackoverflow-last-year.json', { stackoverflow: stackoverflow });
 
   // const githubStar = await githubStarWeekInfo();
-  // writeJson('./files/github-star-temp.json', { githubStar: githubStar });
+  // writeJson('./files/github-star-last-year.json', { githubStar: githubStar });
 
   // const githubIssues = await githubIssuesInfo();
   // writeJson('./files/github-issues.json', { githubIssues: githubIssues });
 
   // const githubPrs = await githubPrsInfo();
   // writeJson('./files/github-prs.json', { githubPrs : githubPrs });
+
+  const googleTrend = await googleTrendInfo();
+  writeJson('./files/google-trend-interestovertime-last-year.json', { googleTrend: googleTrend });
 }
 
 main();
