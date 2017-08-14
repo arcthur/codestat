@@ -55,15 +55,15 @@ async function transformNpmWeekData(repos, pkg, startDate = '2016-07-31', endDat
     if (currentDate === endDate) break;
 
     finalWeeks[currentDate] = {
-      downloads_count: weeks[currentDate] ? weeks[currentDate].downloads_count : 0,
-      compared_rate: lastData ? ((weeks[currentDate].downloads_count - lastData) / lastData).toFixed(2) : null,
+      downloads_count: weeks[currentDate] ? weeks[currentDate] : 0,
+      compared_rate: lastData ? ((weeks[currentDate] - lastData) / lastData).toFixed(2) : null,
     };
 
-    lastData = weeks[currentDate].downloads_count;
+    lastData = weeks[currentDate];
     i++;
   }
 
-  return _.map(weeks, (res, key) => {
+  return _.map(finalWeeks, (res, key) => {
     return {
       pkg_id: pkg,
       repos_id: repos,

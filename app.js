@@ -72,8 +72,8 @@ async function main() {
   // const githubPrs = await githubPrsInfo();
   // writeJson('./files/github-prs.json', { githubPrs : githubPrs });
 
-  const googleTrend = await googleTrendInfo();
-  writeJson('./files/google-trend-interestovertime-last-year.json', { googleTrend: googleTrend });
+  // const googleTrend = await googleTrendInfo();
+  // writeJson('./files/google-trend-interestovertime-last-year.json', { googleTrend: googleTrend });
 }
 
 main();
