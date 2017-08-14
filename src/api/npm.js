@@ -56,7 +56,7 @@ async function transformNpmWeekData(repos, pkg, startDate = '2016-07-31', endDat
 
     finalWeeks[currentDate] = {
       downloads_count: weeks[currentDate] ? weeks[currentDate].downloads_count : 0,
-      compared_rate: lastData ? (weeks[currentDate].downloads_count - lastData).toFixed(2) / lastData : null,
+      compared_rate: lastData ? ((weeks[currentDate].downloads_count - lastData) / lastData).toFixed(2) : null,
     };
 
     lastData = weeks[currentDate].downloads_count;

@@ -15,13 +15,19 @@ async function transformGTrendinterestOverTime(repos, keyword, startDate = '2016
   });
 
   const timeline = (JSON.parse(data)).default.timelineData;
+  let lastData = 0;
 
   return _.map(timeline, res => {
-    return {
+    let item = {
       repos_id: repos,
       week_start_date: moment(res.formattedAxisTime, 'MMM DD, YYYY').format('YYYY-MM-DD'),
+      compared_rate: lastData ? ((res.value[0] - lastData) / lastData).toFixed(2): null,
       index: res.value[0],
     };
+
+    lastData = res.value[0];
+
+    return item;
   });
 }
 
