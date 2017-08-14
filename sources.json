@@ -31,7 +31,7 @@
     "search": "jquery"
   }, {
     "repo": "angular/angular",
-    "pkg": "@angular/common",
+    "pkg": "angular",
     "keyword": "angular",
     "search": "angularjs"
   }, {
