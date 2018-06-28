@@ -16,10 +16,10 @@
   },
   "homepage": "https://github.com/arcthur/codestat",
   "dependencies": {
-    "axios": "^0.16.2",
-    "google-trends-api": "^4.1.0",
-    "lodash": "^4.17.4",
-    "moment": "^2.18.1"
+    "axios": "^0.18.0",
+    "google-trends-api": "^4.6.2",
+    "lodash": "^4.17.10",
+    "moment": "^2.22.2"
   },
   "license": "MIT"
 }
