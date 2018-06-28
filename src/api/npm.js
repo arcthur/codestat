@@ -2,7 +2,7 @@ const axios = require('axios');
 const _ = require('lodash');
 const moment = require('moment');
 
-const NPM_STATS_URL = 'https://npm-stat.com/downloads/range';
+const NPM_STATS_URL = 'https://api.npmjs.org/downloads/range';
 
 const axiosJson = axios.create({
   headers: {
@@ -10,38 +10,35 @@ const axiosJson = axios.create({
   },
 });
 
-async function reqNpmAPI(pkg) {
-  const time = `2013-08-10:${moment().format('YYYY-MM-DD')}`;
-  const res = await axiosJson.get(`${NPM_STATS_URL}/${time}/${pkg}`);
+async function reqNpmAPI(startDate, endDate, pkg) {
+  const res = await axiosJson.get(`${NPM_STATS_URL}/${startDate}:${endDate}/${pkg}`);
   return res.data.downloads;
 }
 
-async function transformNpmDayData(repos, pkg) {
-  const npm = await reqNpmAPI(pkg);
+async function transformNpmDayData(repos, pkg, startDate = '2017-07-31', endDate = '2018-06-28') {
+  const npm = await reqNpmAPI(startDate, endDate, pkg);
   const arr = [];
 
   npm.forEach(res => {
-    if (res.downloads !== 0) {
-      arr.push({
-        pkg_id: pkg,
-        repos_id: repos,
-        downloads_count: res.downloads,
-        stat_date: res.day,
-      });
-    }
+    arr.push({
+      pkg_id: pkg,
+      repos_id: repos,
+      downloads_count: res.downloads,
+      stat_date: res.day,
+    });
   });
 
   return arr;
 }
 
-async function transformNpmWeekData(repos, pkg, startDate = '2016-07-31', endDate = '2017-08-06') {
-  const npm = await reqNpmAPI(pkg);
+async function transformNpmWeekData(repos, pkg, startDate = '2017-07-31', endDate = '2018-06-28') {
+  const npm = await reqNpmAPI(startDate, endDate, pkg);
   const weeks = {};
 
   npm.forEach(res => {
     const week_start_date = moment(res.day).day(0).format('YYYY-MM-DD');
 
-    if (!weeks[week_start_date]) { weeks[week_start_date] = res.downloads; }
+    if (!weeks[week_start_date]) { weeks[week_start_date] = res.downloads || 0; }
     weeks[week_start_date] += res.downloads;
   });
 
@@ -51,8 +48,9 @@ async function transformNpmWeekData(repos, pkg, startDate = '2016-07-31', endDat
   let finalWeeks = {};
 
   while(1) {
-    let currentDate = startMomentDate.day(7).format('YYYY-MM-DD');
-    if (currentDate === endDate) break;
+    let currentMoment = startMomentDate.day(7);
+    let currentDate = currentMoment.format('YYYY-MM-DD');
+    if (currentMoment.isAfter(endDate)) break;
 
     finalWeeks[currentDate] = {
       downloads_count: weeks[currentDate] ? weeks[currentDate] : 0,
